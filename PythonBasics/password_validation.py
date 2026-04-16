@@ -27,3 +27,5 @@ if(len(password)>= 6 and len(password)<= 12):
         print("Password is invalid")       
 else:
     print("Not within the correct range") 
+
+# reffered as white box testing    
