@@ -1,0 +1,8 @@
+This is my personal space for undertanding concepts for this project
+
+if we have the dictionary content - we can only check acd compare with the key
+- because if the key has many objects, then we can't compare it 
+- we create an object thenafter if we need to add or update anything from those object.
+
+del keyword - for removing the key of the dictionary 
+

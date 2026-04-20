@@ -116,14 +116,3 @@ obj.assign_grade("A4160", "102", 92)
 # Fetch any student, do it here
 obj.get_student("A4159")
 obj.get_student("A4160")
-
-
-
-
-
-
-
-
-        
-
-
