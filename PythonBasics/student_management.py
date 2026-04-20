@@ -18,13 +18,22 @@ class student_class:
         # returns the average of all the marks
         return sum(self.grades.values())/len(self.grades)
     def display(self):
-        print("Name of the student: ", self.name)
-        print("Student ID of ", self.name, "is: ", self.student_id)
-        print("Age of the student is: ", self.age)
-        print("enrolled courses are: ", self.courses)
-        print("Grades for all the courses are: ", self.grades)
         print("\n")
-        # this is student class - storing every detail about the student
+        print(" ---------- Student Details ---------- ")
+        print("Name of the student: ", self.name)
+        print("Student ID of is : ", self.student_id)
+        print("Age of the student is: ", self.age)
+        print(end = "\n")
+
+        print("---------- Academic Details ---------")
+
+        print("Enrolled Courses are: ", end="")
+        print(", ".join(self.courses))
+
+        for course, marks in self.grades.items():
+            print("Marks obtained in ", course, "is: ", marks)
+
+        print("Average marks obtained is: ", self.get_average())
 
 class course_class:
     def __init__(self, course_id, course_name, instructor):
@@ -38,7 +47,7 @@ class course_class:
         print("Instaructor appointed for the course - ", self.course_name, "is: ", self.instructor)
         # this is course class - storing all the detail about the courses
 
-class student_manager(student_class, course_class):
+class student_manager:
     def __init__(self):
         self.students = {}
         self.courses = {}
@@ -88,31 +97,61 @@ class student_manager(student_class, course_class):
 
 obj = student_manager() # started my brain
 
-# Add the new courses here 
-obj.add_course("101", "Python", "Anmol Singla")
-obj.add_course("102", "Java", "Girish Patil")
-obj.add_course("103", "C++", "Priyesh Thakur")
+print("Welcome to the student management system")
 
-# Add the new students here
-obj.add_student("A4159", "Meherdeep Singh", 19)
-obj.add_student("A4160", "Lavanya Jain", 19)
+while True:
+    print("\n")
+    print("1. Add Student")
+    print("2. Add Course")
+    print("3. Remove Student")
+    print("4. Get Student Details")
+    print("5. Enroll Student in Course")
+    print("6. Assign Grade to Student")
+    print("7. Get Top Student in Course")
+    print("8. Exit")
 
-# If you want to remove any students, do it here
+    choice = int(input("Enter your choice: "))
 
-# If you want to enroll a paticular student in a course, do it here
-obj.enroll_student("A4159", "101")
-obj.enroll_student("A4159", "102")
-
-obj.enroll_student("A4160", "101")
-obj.enroll_student("A4160", "102")
-
-# If you want to assign a grade, do it here
-obj.assign_grade("A4159", "101", 96)
-obj.assign_grade("A4159", "102", 91)
-
-obj.assign_grade("A4160", "101", 93)
-obj.assign_grade("A4160", "102", 92)
-
-# Fetch any student, do it here
-obj.get_student("A4159")
-obj.get_student("A4160")
+    if choice == 1:
+        student_id = input("Enter student ID: ")
+        name = input("Enter student name: ")
+        age = int(input("Enter student age: "))
+        obj.add_student(student_id, name, age)
+        print("Student added successfully!")
+    
+    elif choice == 2:
+        course_id = input("Enter course ID: ")
+        course_name = input("Enter course name: ")
+        instructor = input("Enter instructor name: ")
+        obj.add_course(course_id, course_name, instructor)
+        print("Course added successfully!")
+    
+    elif choice == 3:
+        remove_id = input("Enter student ID to remove: ")
+        obj.remove_student(remove_id)
+    
+    elif choice == 4:
+        student_id = input("Enter student ID to get details: ")
+        obj.get_student(student_id)
+    
+    elif choice == 5:
+        student_id = input("Enter student ID to enroll: ")
+        course_id = input("Enter course ID to enroll in: ")
+        obj.enroll_student(student_id, course_id)
+    
+    elif choice == 6:
+        student_id = input("Enter student ID to assign grade: ")
+        course_id = input("Enter course ID for grade assignment: ")
+        marks = float(input("Enter marks obtained: "))
+        obj.assign_grade(student_id, course_id, marks)
+    
+    elif choice == 7:
+        course_id = input("Enter course ID to get top student: ")
+        obj.get_top_student(course_id)
+    
+    elif choice == 8:
+        print("Exiting the system. Goodbye!")
+        break
+    
+    else:
+        print("Invalid choice! Please try again.")
