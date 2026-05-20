@@ -68,7 +68,62 @@ def build_results(students):
     return sorted_students
     pass
 
-def print_report_table():
+results = build_results(students)
+
+def print_report_table(results):
+    print(f"{'Rank':<5} {'Name':<10} {'Marks':<10} {'Average':<10} {'Grade':<10} {'GPA':<10}")
+
+    print("-" * 60) # prints the line
 
     for student in results:
-        print(f"{student['rank']:<5} {student['name']:<5} {student['average']:<10.2f} {student['grade']:<10} {student['gpa']:<10.2f} {', '.join(student['failed_subjects']):<20}")
+        print(f"{student['rank']:<5} {student['name']:<10} {', '.join(student['marks'].keys())} {', '.join(str(value) for value in student['marks'].values()):<10} {student['average']:<10.2f} {student['grade']:<10} {student['gpa']:<10.2f}")
+        # prints the report table as mentioned
+
+    for student in results:
+        if student['failed_subjects']:
+            print(f"{student['name']} failed in: {', '.join(student['failed_subjects'])}")
+            # prints the failed subjects for each student if any
+    pass
+
+def subject_stats(students):
+    stats = {}
+    subjects = list(students[0]["marks"].keys())
+
+    for subject_name in subjects:
+        total = 0
+
+        min_marks = 100
+        max_marks = 0
+
+        min_student = ""
+        max_student = ""
+
+        for student in students:
+            mark = student["marks"][subject_name]
+            total += mark
+
+            if mark < min_marks:
+                min_marks = mark
+                min_student = student["name"]
+
+            if mark > max_marks:
+                max_marks = mark
+                max_student = student["name"]
+
+        average = total / len(students)
+        stats[subject_name] = {
+            "Average": average,
+            "Minimum Marks": {
+                "name": min_student,
+                "Marks": min_marks
+            },
+            "Maximum Marks": {
+                "name": max_student,
+                "Marks": max_marks
+            }
+        }
+
+    return stats
+
+stats = subject_stats(students)
+# prints the subject-wise statistics
