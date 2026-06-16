@@ -3,9 +3,9 @@ import numpy as np
 np.random.seed(42)
 a = np.random.choice([1,2,3,4],size = 10, replace= True) #choice 
 b = np.random.randint(0,255, (3,4))
-c = np.random.rand(3,4) # range is [0,1)
+c = np.random.randn(3,4) # range is [0,1)
 
-print(a)
+print(c)
 
 a = np.array([[1,2,3], [4,5,6], [7,8,9]])
 print (a[0])
