@@ -58,4 +58,3 @@ print("Binary Cross-Entropy Loss: ", bce_loss)
 #calculating accuracy
 accuracy = np.mean(predictions == y.flatten())
 print("Accuracy: ", accuracy)
-
